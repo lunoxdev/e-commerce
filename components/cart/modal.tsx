@@ -28,10 +28,16 @@ export default function CartModal() {
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
   const phoneNumber = "+50672829018"; // Tu número de WhatsApp
+  const [receiptNumber, setReceiptNumber] = useState('');
 
   const handleConfirmOrder = () => {
     if (!cart || cart.lines.length === 0) {
       alert("Tu carrito está vacío. Por favor, agrega artículos antes de confirmar.");
+      return;
+    }
+
+    if (!receiptNumber.trim()) {
+      alert("Por favor, ingresa el número de comprobante de tu pago SINPE.");
       return;
     }
 
@@ -42,12 +48,13 @@ export default function CartModal() {
         quantity: item.quantity,
         price: `CRC ${new Intl.NumberFormat(undefined, { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0, useGrouping: true }).format(parseFloat(item.cost.totalAmount.amount))}`
       })),
-      totalAmount: `CRC ${new Intl.NumberFormat(undefined, { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0, useGrouping: true }).format(parseFloat(cart.cost.totalAmount.amount))}`
+      totalAmount: `CRC ${new Intl.NumberFormat(undefined, { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0, useGrouping: true }).format(parseFloat(cart.cost.totalAmount.amount))}`,
+      receiptNumber: receiptNumber // Add receipt number to order details
     };
 
     const message = `¡Hola! Tu orden ${orderDetails.orderNumber} ha sido realizada con éxito.\n\nResumen de la Orden:\n${orderDetails.products
       .map((p) => `- ${p.name} (x${p.quantity}) - ${p.price}`)
-      .join("\n")}\nTotal: ${orderDetails.totalAmount}\n\n¡Gracias por tu compra!`;
+      .join("\n")}\nNúmero de Comprobante SINPE: ${orderDetails.receiptNumber}\nTotal: ${orderDetails.totalAmount}\n\n¡Gracias por tu compra!`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace("+", "")}/?text=${encodedMessage}`;
@@ -244,10 +251,23 @@ export default function CartModal() {
                       />
                     </div>
                   </div>
+                  <div className="mb-4 mt-4 rounded-lg border border-neutral-200 bg-neutral-100 p-4 text-sm dark:border-neutral-700 dark:bg-neutral-900">
+                    <p className="font-bold">Instrucciones de Pago SINPE Móvil:</p>
+                    <p className="mt-2">Realiza tu pago al siguiente número:</p>
+                    <p className="text-lg font-semibold text-blue-600">+506 8770 9040</p>
+                    <p className="mt-4">Una vez realizado el pago, ingresa el número de comprobante:</p>
+                    <input
+                      type="text"
+                      placeholder="Número de Comprobante"
+                      value={receiptNumber}
+                      onChange={(e) => setReceiptNumber(e.target.value)}
+                      className="mt-2 w-full rounded-md border border-neutral-300 bg-white p-2 text-black dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
+                    />
+                  </div>
                   <button
                     onClick={handleConfirmOrder}
                     className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
-                    disabled={cart.lines.length === 0}
+                    disabled={cart.lines.length === 0 || !receiptNumber.trim()}
                   >
                     Confirmar Orden y Pagar
                   </button>
