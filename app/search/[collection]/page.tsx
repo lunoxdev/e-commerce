@@ -8,7 +8,7 @@ import { MOCK_PRODUCTS, Product } from 'lib/mock-data';
 // Explicitly define the expected props type based on Vercel's error
 interface PageProps {
   params: Promise<{ collection: string }>; // Reverted to Promise<any> for params
-  searchParams?: { [key: string]: string | string[] | undefined };
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }> | undefined; // Changed to Promise<any> for searchParams
 }
 
 export const metadata: Metadata = {
@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 export default async function CategoryPage(props: PageProps) {
   const resolvedParams = await props.params; // Await the promise
   const { collection } = resolvedParams; // Destructure collection from resolved params
-  const searchParams = props.searchParams;
-  const { sort } = searchParams as { [key: string]: string };
+  const resolvedSearchParams = (await props.searchParams) || {}; // Await and provide a default empty object
+  const { sort } = resolvedSearchParams as { [key: string]: string };
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
   let products: Product[] = MOCK_PRODUCTS.filter(product =>
     collection === 'all' ? true : product.tags.includes(collection)
