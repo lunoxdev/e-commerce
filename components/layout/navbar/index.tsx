@@ -1,8 +1,6 @@
 import CartModal from 'components/cart/modal';
 import LogoSquare from 'components/logo-square';
 import { MOCK_COLLECTIONS } from 'lib/mock-data'; // Import MOCK_COLLECTIONS
-// import { getMenu } from 'lib/shopify';
-// import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';

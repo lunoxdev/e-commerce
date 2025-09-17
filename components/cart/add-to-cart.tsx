@@ -6,18 +6,6 @@ import { useProduct } from 'components/product/product-context';
 import { useActionState } from 'react'; // Import useActionState
 import { addItem } from './actions'; // Import addItem server action
 import { Product, ProductVariant } from './cart-context'; // Import Product and ProductVariant
-// interface Product { // Removed local interface
-//   id: string;
-//   handle: string;
-//   availableForSale: boolean;
-//   variants: ProductVariant[];
-// }
-// interface ProductVariant { // Removed local interface
-//   id: string;
-//   title: string;
-//   availableForSale: boolean;
-//   selectedOptions: { name: string; value: string }[];
-// }
 
 function SubmitButton({
   availableForSale,

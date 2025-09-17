@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 import Prose from 'components/prose';
-// import { getPage } from 'lib/shopify';
 import { notFound } from 'next/navigation';
 
 // Explicitly define the expected props type based on Vercel's error
