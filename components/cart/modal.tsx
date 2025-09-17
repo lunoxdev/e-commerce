@@ -27,18 +27,24 @@ export default function CartModal() {
   const closeCart = () => setIsOpen(false);
   const phoneNumber = "+50672829018"; // Tu número de WhatsApp
   const [receiptNumber, setReceiptNumber] = useState('');
+  const paymentNumber = '22222222'; // The payment number to be copied
+  const [displayedPaymentNumber, setDisplayedPaymentNumber] = useState(paymentNumber);
+  const [showCopyButton, setShowCopyButton] = useState(true); // New state for copy button visibility
 
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      alert('Número copiado!');
+      setDisplayedPaymentNumber('Copiado'); // Show "Copied" message
+      setShowCopyButton(false); // Hide the copy button
+      setTimeout(() => {
+        setDisplayedPaymentNumber(paymentNumber); // Revert to actual number after 3 seconds
+        setShowCopyButton(true); // Show the copy button again
+      }, 3000);
     } catch (err) {
       console.error('Error al copiar: ', err);
       alert('Fallo al copiar el número de pago.');
     }
   };
-
-  const paymentNumber = '87709040'; // The payment number to be copied
 
   const handleConfirmOrder = () => {
     if (!cart || cart.lines.length === 0) {
@@ -265,14 +271,22 @@ export default function CartModal() {
                     <p className="font-bold">Instrucciones de Pago SINPE Móvil:</p>
                     <p className="mt-2">Realiza tu pago al siguiente número:</p>
                     <div className="flex items-center space-x-2">
-                      <p className="text-lg font-semibold text-blue-600">{paymentNumber}</p>
-                      <button
-                        onClick={() => copyToClipboard(paymentNumber)}
-                        className="p-1.5 rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors cursor-pointer"
-                        aria-label="Copiar número de pago"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#cccccc" d="M0 2.729V2a1 1 0 0 1 1-1h2v1H1v12h4v1H1a1 1 0 0 1-1-1zM12 5V2a1 1 0 0 0-1-1H9v1h2v3zm-1 1h2v9H6V6zV5H6a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2z" /><path fill="#cccccc" d="M7 10h5V9H7zm0-2h5V7H7zm0 4h5v-1H7zm0 2h5v-1H7zM9 2V1a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v1h1V1h4v1zM3 3h6V2H3z" /></svg>
-                      </button>
+                      <p className="w-24 text-lg font-semibold text-blue-600 dark:text-blue-500 transition-colors duration-300 ease-in-out">
+                        {displayedPaymentNumber === 'Copiado' ? (
+                          <span className="text-green-500">Copiado</span>
+                        ) : (
+                          paymentNumber
+                        )}
+                      </p>
+                      {showCopyButton && (
+                        <button
+                          onClick={() => copyToClipboard(paymentNumber)}
+                          className="p-1.5 rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors cursor-pointer"
+                          aria-label="Copiar número de pago"
+                        >
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#cccccc" d="M0 2.729V2a1 1 0 0 1 1-1h2v1H1v12h4v1H1a1 1 0 0 1-1-1zM12 5V2a1 1 0 0 0-1-1H9v1h2v3zm-1 1h2v9H6V6zV5H6a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2z" /><path fill="#cccccc" d="M7 10h5V9H7zm0-2h5V7H7zm0 4h5v-1H7zm0 2h5v-1H7zM9 2V1a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v1h1V1h4v1zM3 3h6V2H3z" /></svg>
+                        </button>
+                      )}
                     </div>
                     <p className="mt-4">Una vez realizado el pago, ingresa el número de comprobante:</p>
                     <input
