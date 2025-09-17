@@ -24,7 +24,7 @@ export default async function SearchPage(props: {
   }
 
   // Apply sorting (mock implementation - you would replace with actual sorting logic)
-  if (sortKey === 'price' && products) {
+  if (sortKey === 'PRICE' && products) {
     products.sort((a, b) => {
       const priceA = Number(a.priceRange.maxVariantPrice.amount);
       const priceB = Number(b.priceRange.maxVariantPrice.amount);
