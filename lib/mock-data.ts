@@ -31,13 +31,13 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "1",
     handle: "acme-circles-t-shirt",
     availableForSale: true,
-    title: "Acme Circles T-Shirt",
-    description: "A stylish t-shirt with a unique circles design.",
+    title: "Camiseta de Círculos",
+    description: "Una camiseta elegante con un diseño único de círculos.",
     descriptionHtml:
-      "<p>A stylish t-shirt with a unique <strong>circles</strong> design.</p>",
+      "<p>Una camiseta elegante con un diseño único de <strong>círculos</strong>.</p>",
     options: [
-      { id: "color", name: "Color", values: ["Black", "White"] },
-      { id: "size", name: "Size", values: ["S", "M", "L", "XL"] },
+      { id: "color", name: "Color", values: ["Negro", "Blanco"] },
+      { id: "size", name: "Tamaño", values: ["S", "M", "L", "XL"] },
     ],
     priceRange: {
       maxVariantPrice: { amount: "20.00", currencyCode: "USD" },
@@ -46,40 +46,40 @@ export const MOCK_PRODUCTS: Product[] = [
     variants: [
       {
         id: "1-black-s",
-        title: "Black / S",
+        title: "Negro / S",
         availableForSale: true,
         selectedOptions: [
-          { name: "Color", value: "Black" },
+          { name: "Color", value: "Negro" },
           { name: "Size", value: "S" },
         ],
         price: { amount: "20.00", currencyCode: "USD" },
       },
       {
         id: "1-black-m",
-        title: "Black / M",
+        title: "Negro / M",
         availableForSale: true,
         selectedOptions: [
-          { name: "Color", value: "Black" },
+          { name: "Color", value: "Negro" },
           { name: "Size", value: "M" },
         ],
         price: { amount: "20.00", currencyCode: "USD" },
       },
       {
         id: "1-black-l",
-        title: "Black / L",
+        title: "Negro / L",
         availableForSale: true,
         selectedOptions: [
-          { name: "Color", value: "Black" },
+          { name: "Color", value: "Negro" },
           { name: "Size", value: "L" },
         ],
         price: { amount: "20.00", currencyCode: "USD" },
       },
       {
         id: "1-black-xl",
-        title: "Black / XL",
+        title: "Negro / XL",
         availableForSale: true,
         selectedOptions: [
-          { name: "Color", value: "Black" },
+          { name: "Color", value: "Negro" },
           { name: "Size", value: "XL" },
         ],
         price: { amount: "20.00", currencyCode: "USD" },
@@ -87,21 +87,21 @@ export const MOCK_PRODUCTS: Product[] = [
     ],
     featuredImage: {
       url: "https://picsum.photos/seed/acme-tshirt/640/480",
-      altText: "Acme Circles T-Shirt Image",
+      altText: "Imagen de Camiseta de Círculos",
     },
     images: [
       {
         url: "https://picsum.photos/seed/acme-tshirt-a/640/480",
-        altText: "Acme Circles T-Shirt Image 1",
+        altText: "Imagen 1 de Camiseta de Círculos",
       },
       {
         url: "https://picsum.photos/seed/acme-tshirt-b/640/480",
-        altText: "Acme Circles T-Shirt Image 2",
+        altText: "Imagen 2 de Camiseta de Círculos",
       },
     ],
     seo: {
-      title: "Acme Circles T-Shirt",
-      description: "SEO description for Acme Circles T-Shirt",
+      title: "Camiseta de Círculos",
+      description: "Descripción SEO para Camiseta de Círculos",
     },
     tags: ["clothing", "featured"],
     updatedAt: new Date().toISOString(),
@@ -110,11 +110,11 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "2",
     handle: "acme-drawstring-bag",
     availableForSale: true,
-    title: "Acme Drawstring Bag",
-    description: "A versatile drawstring bag for your everyday needs.",
+    title: "Bolsa con Cordón",
+    description: "Una bolsa versátil con cordón para tus necesidades diarias.",
     descriptionHtml:
-      "<p>A <strong>versatile</strong> drawstring bag for your everyday needs.</p>",
-    options: [{ id: "color", name: "Color", values: ["Black"] }],
+      "<p>Una bolsa <strong>versátil</strong> con cordón para tus necesidades diarias.</p>",
+    options: [{ id: "color", name: "Color", values: ["Negro"] }],
     priceRange: {
       maxVariantPrice: { amount: "12.00", currencyCode: "USD" },
       minVariantPrice: { amount: "12.00", currencyCode: "USD" },
@@ -122,25 +122,25 @@ export const MOCK_PRODUCTS: Product[] = [
     variants: [
       {
         id: "2-black",
-        title: "Black",
+        title: "Negro",
         availableForSale: true,
-        selectedOptions: [{ name: "Color", value: "Black" }],
+        selectedOptions: [{ name: "Color", value: "Negro" }],
         price: { amount: "12.00", currencyCode: "USD" },
       },
     ],
     featuredImage: {
       url: "https://picsum.photos/seed/acme-bag/640/480",
-      altText: "Acme Drawstring Bag Image",
+      altText: "Imagen de Bolsa con Cordón",
     },
     images: [
       {
         url: "https://picsum.photos/seed/acme-bag-a/640/480",
-        altText: "Acme Drawstring Bag Image 1",
+        altText: "Imagen 1 de Bolsa con Cordón",
       },
     ],
     seo: {
-      title: "Acme Drawstring Bag",
-      description: "SEO description for Acme Drawstring Bag",
+      title: "Bolsa con Cordón",
+      description: "Descripción SEO para Bolsa con Cordón",
     },
     tags: ["accessories", "featured"],
     updatedAt: new Date().toISOString(),
@@ -149,11 +149,11 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "3",
     handle: "acme-cup",
     availableForSale: true,
-    title: "Acme Cup",
-    description: "A stylish cup for your favorite beverages.",
+    title: "Taza",
+    description: "Una taza elegante para tus bebidas favoritas.",
     descriptionHtml:
-      "<p>A <strong>stylish</strong> cup for your favorite beverages.</p>",
-    options: [{ id: "color", name: "Color", values: ["Gray"] }],
+      "<p>Una taza <strong>elegante</strong> para tus bebidas favoritas.</p>",
+    options: [{ id: "color", name: "Color", values: ["Gris"] }],
     priceRange: {
       maxVariantPrice: { amount: "15.00", currencyCode: "USD" },
       minVariantPrice: { amount: "15.00", currencyCode: "USD" },
@@ -161,25 +161,25 @@ export const MOCK_PRODUCTS: Product[] = [
     variants: [
       {
         id: "3-gray",
-        title: "Gray",
+        title: "Gris",
         availableForSale: true,
-        selectedOptions: [{ name: "Color", value: "Gray" }],
+        selectedOptions: [{ name: "Color", value: "Gris" }],
         price: { amount: "15.00", currencyCode: "USD" },
       },
     ],
     featuredImage: {
       url: "https://picsum.photos/seed/acme-cup/640/480",
-      altText: "Acme Cup Image",
+      altText: "Imagen de Taza",
     },
     images: [
       {
         url: "https://picsum.photos/seed/acme-cup-a/640/480",
-        altText: "Acme Cup Image 1",
+        altText: "Imagen 1 de Taza",
       },
     ],
     seo: {
-      title: "Acme Cup",
-      description: "SEO description for Acme Cup",
+      title: "Taza",
+      description: "Descripción SEO para Taza",
     },
     tags: ["homeware", "featured"],
     updatedAt: new Date().toISOString(),
@@ -188,11 +188,11 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "4",
     handle: "acme-mug",
     availableForSale: true,
-    title: "Acme Mug",
-    description: "A classic ceramic mug for your coffee or tea.",
+    title: "Taza (con asa)",
+    description: "Una taza de cerámica clásica para tu café o té.",
     descriptionHtml:
-      "<p>A <strong>classic</strong> ceramic mug for your coffee or tea.</p>",
-    options: [{ id: "color", name: "Color", values: ["Black"] }],
+      "<p>Una taza de cerámica <strong>clásica</strong> para tu café o té.</p>",
+    options: [{ id: "color", name: "Color", values: ["Negro"] }],
     priceRange: {
       maxVariantPrice: { amount: "15.00", currencyCode: "USD" },
       minVariantPrice: { amount: "15.00", currencyCode: "USD" },
@@ -200,25 +200,25 @@ export const MOCK_PRODUCTS: Product[] = [
     variants: [
       {
         id: "4-black",
-        title: "Black",
+        title: "Negro",
         availableForSale: true,
-        selectedOptions: [{ name: "Color", value: "Black" }],
+        selectedOptions: [{ name: "Color", value: "Negro" }],
         price: { amount: "15.00", currencyCode: "USD" },
       },
     ],
     featuredImage: {
       url: "https://picsum.photos/seed/acme-mug/640/480",
-      altText: "Acme Mug Image",
+      altText: "Imagen de Taza",
     },
     images: [
       {
         url: "https://picsum.photos/seed/acme-mug-a/640/480",
-        altText: "Acme Mug Image 1",
+        altText: "Imagen 1 de Taza",
       },
     ],
     seo: {
-      title: "Acme Mug",
-      description: "SEO description for Acme Mug",
+      title: "Taza",
+      description: "Descripción SEO para Taza",
     },
     tags: ["homeware", "featured"],
     updatedAt: new Date().toISOString(),
@@ -227,13 +227,13 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "5",
     handle: "acme-hoodie",
     availableForSale: true,
-    title: "Acme Hoodie",
-    description: "A comfortable and stylish hoodie.",
+    title: "Sudadera con Capucha",
+    description: "Una sudadera cómoda y elegante con capucha.",
     descriptionHtml:
-      "<p>A <strong>comfortable</strong> and stylish hoodie.</p>",
+      "<p>Una sudadera <strong>cómoda</strong> y elegante con capucha.</p>",
     options: [
-      { id: "color", name: "Color", values: ["Gray"] },
-      { id: "size", name: "Size", values: ["S", "M", "L"] },
+      { id: "color", name: "Color", values: ["Gris"] },
+      { id: "size", name: "Tamaño", values: ["S", "M", "L"] },
     ],
     priceRange: {
       maxVariantPrice: { amount: "50.00", currencyCode: "USD" },
@@ -242,30 +242,30 @@ export const MOCK_PRODUCTS: Product[] = [
     variants: [
       {
         id: "5-gray-s",
-        title: "Gray / S",
+        title: "Gris / S",
         availableForSale: true,
         selectedOptions: [
-          { name: "Color", value: "Gray" },
+          { name: "Color", value: "Gris" },
           { name: "Size", value: "S" },
         ],
         price: { amount: "50.00", currencyCode: "USD" },
       },
       {
         id: "5-gray-m",
-        title: "Gray / M",
+        title: "Gris / M",
         availableForSale: true,
         selectedOptions: [
-          { name: "Color", value: "Gray" },
+          { name: "Color", value: "Gris" },
           { name: "Size", value: "M" },
         ],
         price: { amount: "50.00", currencyCode: "USD" },
       },
       {
         id: "5-gray-l",
-        title: "Gray / L",
+        title: "Gris / L",
         availableForSale: true,
         selectedOptions: [
-          { name: "Color", value: "Gray" },
+          { name: "Color", value: "Gris" },
           { name: "Size", value: "L" },
         ],
         price: { amount: "50.00", currencyCode: "USD" },
@@ -273,17 +273,17 @@ export const MOCK_PRODUCTS: Product[] = [
     ],
     featuredImage: {
       url: "https://picsum.photos/seed/acme-hoodie/640/480",
-      altText: "Acme Hoodie Image",
+      altText: "Imagen de Sudadera con Capucha",
     },
     images: [
       {
         url: "https://picsum.photos/seed/acme-hoodie-a/640/480",
-        altText: "Acme Hoodie Image 1",
+        altText: "Imagen 1 de Sudadera con Capucha",
       },
     ],
     seo: {
-      title: "Acme Hoodie",
-      description: "SEO description for Acme Hoodie",
+      title: "Sudadera con Capucha Acme",
+      description: "Descripción SEO para Sudadera con Capucha",
     },
     tags: ["clothing", "featured"],
     updatedAt: new Date().toISOString(),
@@ -292,10 +292,10 @@ export const MOCK_PRODUCTS: Product[] = [
     id: "6",
     handle: "acme-baby-onesie",
     availableForSale: true,
-    title: "Acme Baby Onesie",
-    description: "A cute baby onesie.",
-    descriptionHtml: "<p>A <strong>cute</strong> baby onesie.</p>",
-    options: [{ id: "size", name: "Size", values: ["NB", "3M", "6M"] }],
+    title: "Pijama de Bebé",
+    description: "Un lindo pijama de bebé.",
+    descriptionHtml: "<p>Un <strong>lindo</strong> pijama de bebé.</p>",
+    options: [{ id: "size", name: "Tamaño", values: ["RN", "3M", "6M"] }],
     priceRange: {
       maxVariantPrice: { amount: "10.00", currencyCode: "USD" },
       minVariantPrice: { amount: "10.00", currencyCode: "USD" },
@@ -303,21 +303,21 @@ export const MOCK_PRODUCTS: Product[] = [
     variants: [
       {
         id: "6-nb",
-        title: "Newborn",
+        title: "Recién Nacido",
         availableForSale: true,
         selectedOptions: [{ name: "Size", value: "NB" }],
         price: { amount: "10.00", currencyCode: "USD" },
       },
       {
         id: "6-3m",
-        title: "3 Months",
+        title: "3 Meses",
         availableForSale: true,
         selectedOptions: [{ name: "Size", value: "3M" }],
         price: { amount: "10.00", currencyCode: "USD" },
       },
       {
         id: "6-6m",
-        title: "6 Months",
+        title: "6 Meses",
         availableForSale: true,
         selectedOptions: [{ name: "Size", value: "6M" }],
         price: { amount: "10.00", currencyCode: "USD" },
@@ -325,17 +325,17 @@ export const MOCK_PRODUCTS: Product[] = [
     ],
     featuredImage: {
       url: "https://picsum.photos/seed/acme-baby-onesie/640/480",
-      altText: "Acme Baby Onesie Image",
+      altText: "Imagen de Pijama de Bebé",
     },
     images: [
       {
         url: "https://picsum.photos/seed/acme-baby-onesie-a/640/480",
-        altText: "Acme Baby Onesie Image 1",
+        altText: "Imagen 1 de Pijama de Bebé",
       },
     ],
     seo: {
-      title: "Acme Baby Onesie",
-      description: "SEO description for Acme Baby Onesie",
+      title: "Pijama de Bebé Acme",
+      description: "Descripción SEO para Pijama de Bebé",
     },
     tags: ["baby", "featured"],
     updatedAt: new Date().toISOString(),
@@ -375,7 +375,7 @@ export const getMockCart = async () => {
 export const MOCK_COLLECTIONS = [
   {
     handle: "all",
-    title: "All",
+    title: "Todos",
     path: "/search",
     updatedAt: new Date().toISOString(),
   },
@@ -384,14 +384,14 @@ export const MOCK_COLLECTIONS = [
 export const MOCK_PAGES = [
   {
     handle: "about",
-    title: "About Us",
-    body: "<p>About our store.</p>",
+    title: "Sobre Nosotros",
+    body: "<p>Acerca de nuestra tienda.</p>",
     updatedAt: new Date().toISOString(),
   },
   {
     handle: "contact",
-    title: "Contact Us",
-    body: "<p>Contact us here.</p>",
+    title: "Contáctanos",
+    body: "<p>Contáctanos aquí.</p>",
     updatedAt: new Date().toISOString(),
   },
 ];

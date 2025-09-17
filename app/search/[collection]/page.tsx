@@ -12,8 +12,8 @@ interface PageProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Collection',
-  description: 'Collection page description.'
+  title: 'Colección',
+  description: 'Página de colección de productos.'
 };
 
 export default async function CategoryPage(props: PageProps) {
@@ -38,7 +38,7 @@ export default async function CategoryPage(props: PageProps) {
   return (
     <section>
       {products.length === 0 ? (
-        <p className="py-3 text-lg">{`No products found in ${collection} collection`}</p>
+        <p className="py-3 text-lg">{`No se encontraron productos en la colección ${collection}`}</p>
       ) : (
         <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <ProductGridItems products={products} />

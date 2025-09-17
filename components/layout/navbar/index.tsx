@@ -8,7 +8,7 @@ import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
 
-const SITE_NAME = "My E-Commerce"
+const SITE_NAME = "Mi Tienda en Línea"
 
 export async function Navbar() {
   const menu = MOCK_COLLECTIONS; // Use MOCK_COLLECTIONS to populate the menu
