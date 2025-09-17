@@ -7,7 +7,7 @@ import { MOCK_PRODUCTS, Product } from 'lib/mock-data';
 
 // Explicitly define the expected props type based on Vercel's error
 interface PageProps {
-  params: Promise<{ collection: string }>;
+  params: Promise<any>; // Changed to Promise<any>
   searchParams?: { [key: string]: string | string[] | undefined };
 }
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CategoryPage(props: PageProps) {
-  const resolvedParams = await props.params; // Await props.params
+  const resolvedParams = (await props.params) as { collection: string }; // Cast here
   const { collection } = resolvedParams; // Destructure collection from resolved params
   const searchParams = props.searchParams;
   const { sort } = searchParams as { [key: string]: string };
@@ -27,7 +27,7 @@ export default async function CategoryPage(props: PageProps) {
   );
 
   // Apply sorting (mock implementation - you would replace with actual sorting logic)
-  if (sortKey === 'price' && products) {
+  if (sortKey === 'PRICE' && products) {
     products.sort((a, b) => {
       const priceA = Number(a.priceRange.maxVariantPrice.amount);
       const priceB = Number(b.priceRange.maxVariantPrice.amount);
