@@ -5,21 +5,25 @@ import ProductGridItems from 'components/layout/product-grid-items';
 import { defaultSort, sorting } from 'lib/constants';
 import { MOCK_PRODUCTS, Product } from 'lib/mock-data';
 
+// Explicitly define the expected props type based on Vercel's error
+interface PageProps {
+  params: Promise<{ collection: string }>;
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
 export const metadata: Metadata = {
   title: 'Collection',
   description: 'Collection page description.'
 };
 
-export default async function CategoryPage(props: {
-  params: { collection: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+export default async function CategoryPage(props: PageProps) {
+  const resolvedParams = await props.params; // Await props.params
+  const { collection } = resolvedParams; // Destructure collection from resolved params
   const searchParams = props.searchParams;
-  const params = props.params;
   const { sort } = searchParams as { [key: string]: string };
   const { sortKey, reverse } = sorting.find((item) => item.slug === sort) || defaultSort;
   let products: Product[] = MOCK_PRODUCTS.filter(product =>
-    params.collection === 'all' ? true : product.tags.includes(params.collection)
+    collection === 'all' ? true : product.tags.includes(collection)
   );
 
   // Apply sorting (mock implementation - you would replace with actual sorting logic)
@@ -34,7 +38,7 @@ export default async function CategoryPage(props: {
   return (
     <section>
       {products.length === 0 ? (
-        <p className="py-3 text-lg">{`No products found in ${params.collection} collection`}</p>
+        <p className="py-3 text-lg">{`No products found in ${collection} collection`}</p>
       ) : (
         <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           <ProductGridItems products={products} />
