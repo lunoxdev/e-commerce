@@ -27,11 +27,11 @@ export default function CartModal() {
   const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
-  const phoneNumber = "+50672829018"; // Your WhatsApp number
+  const phoneNumber = "+50672829018"; // Tu número de WhatsApp
 
   const handleConfirmOrder = () => {
     if (!cart || cart.lines.length === 0) {
-      alert("Your cart is empty. Please add items before confirming.");
+      alert("Tu carrito está vacío. Por favor, agrega artículos antes de confirmar.");
       return;
     }
 
@@ -45,16 +45,16 @@ export default function CartModal() {
       totalAmount: `${cart.cost.totalAmount.currencyCode} ${cart.cost.totalAmount.amount}`
     };
 
-    const message = `Hello! Your order ${orderDetails.orderNumber} has been placed successfully.\n\nOrder Summary:\n${orderDetails.products
+    const message = `¡Hola! Tu orden ${orderDetails.orderNumber} ha sido realizada con éxito.\n\nResumen de la Orden:\n${orderDetails.products
       .map((p) => `- ${p.name} (x${p.quantity}) - ${p.price}`)
-      .join("\n")}\nTotal: ${orderDetails.totalAmount}\n\nThank you for your purchase!`;
+      .join("\n")}\nTotal: ${orderDetails.totalAmount}\n\n¡Gracias por tu compra!`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace("+", "")}/?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank');
 
-    alert("Order confirmed! Opening WhatsApp with order details.");
+    alert("¡Orden confirmada! Abriendo WhatsApp con los detalles de tu orden.");
   };
 
   useEffect(() => {
@@ -105,8 +105,8 @@ export default function CartModal() {
           >
             <Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 p-6 text-black backdrop-blur-xl md:w-[390px] dark:border-neutral-700 dark:bg-black/80 dark:text-white">
               <div className="flex items-center justify-between">
-                <p className="text-lg font-semibold">My Cart</p>
-                <button aria-label="Close cart" onClick={closeCart}>
+                <p className="text-lg font-semibold">Mi Carrito</p>
+                <button aria-label="Cerrar carrito" onClick={closeCart}>
                   <CloseCart />
                 </button>
               </div>
@@ -115,7 +115,7 @@ export default function CartModal() {
                 <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden">
                   <ShoppingCartIcon className="h-16" />
                   <p className="mt-6 text-center text-2xl font-bold">
-                    Your cart is empty.
+                    Tu carrito está vacío.
                   </p>
                 </div>
               ) : (
@@ -224,7 +224,7 @@ export default function CartModal() {
                   </ul>
                   <div className="py-4 text-sm text-neutral-500 dark:text-neutral-400">
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
-                      <p>Taxes</p>
+                      <p>Impuestos</p>
                       <Price
                         className="text-right text-base text-black dark:text-white"
                         amount={cart.cost.totalTaxAmount.amount}
@@ -232,8 +232,8 @@ export default function CartModal() {
                       />
                     </div>
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
-                      <p>Shipping</p>
-                      <p className="text-right">Calculated at checkout</p>
+                      <p>Envío</p>
+                      <p className="text-right">Calculado al finalizar la compra</p>
                     </div>
                     <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
                       <p>Total</p>
@@ -249,7 +249,7 @@ export default function CartModal() {
                     className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
                     disabled={cart.lines.length === 0}
                   >
-                    Confirm Order & Pay
+                    Confirmar Orden y Pagar
                   </button>
                 </div>
               )}
@@ -283,7 +283,7 @@ function CheckoutButton() {
       type="submit"
       disabled={pending}
     >
-      {pending ? <LoadingDots className="bg-white" /> : 'Proceed to Checkout'}
+      {pending ? <LoadingDots className="bg-white" /> : 'Proceder al Pago'}
     </button>
   );
 }
