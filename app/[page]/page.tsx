@@ -16,6 +16,7 @@ interface Page {
 }
 
 export default async function Page(props: { params: { page: string } }) {
+  const { params: { page: pageHandle } } = props; // Directly destructure pageHandle from props.params
   const page: Page = {
     title: 'Dummy Page',
     body: '<p>This is a dummy page body.</p>',
