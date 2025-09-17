@@ -5,15 +5,17 @@ const Label = ({
   title,
   amount,
   currencyCode,
+  position // Add position prop
 }: {
   title: string;
   amount: string;
   currencyCode: string;
+  position?: 'bottom' | 'center'; // Define position type
 }) => {
   return (
     <div
       className={clsx('absolute bottom-0 left-0 flex w-full px-4 pb-4 @container/label', {
-        'lg:px-20 lg:pb-[35%]': false // Remove the conditional styling for 'center' position
+        'lg:px-20 lg:pb-[35%]': position === 'center' // Conditionally apply styling for center position
       })}
     >
       <div className="flex items-center rounded-full border bg-white/70 p-1 text-xs font-semibold text-black backdrop-blur-md dark:border-neutral-800 dark:bg-black/70 dark:text-white">
