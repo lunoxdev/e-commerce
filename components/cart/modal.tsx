@@ -3,14 +3,12 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import LoadingDots from 'components/loading-dots';
 import Price from 'components/price';
 import { DEFAULT_OPTION } from 'lib/constants';
 import { createUrl } from 'lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useRef, useState } from 'react';
-import { useFormStatus } from 'react-dom';
 import { createCartAndSetCookie } from './actions';
 import { CartItem, useCart } from './cart-context';
 import { DeleteItemButton } from './delete-item-button';
@@ -30,6 +28,18 @@ export default function CartModal() {
   const phoneNumber = "+50672829018"; // Tu número de WhatsApp
   const [receiptNumber, setReceiptNumber] = useState('');
 
+  const copyToClipboard = async (text: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      alert('Número copiado!');
+    } catch (err) {
+      console.error('Error al copiar: ', err);
+      alert('Fallo al copiar el número de pago.');
+    }
+  };
+
+  const paymentNumber = '87709040'; // The payment number to be copied
+
   const handleConfirmOrder = () => {
     if (!cart || cart.lines.length === 0) {
       alert("Tu carrito está vacío. Por favor, agrega artículos antes de confirmar.");
@@ -42,7 +52,7 @@ export default function CartModal() {
     }
 
     const orderDetails = {
-      orderNumber: `ORDER-${Math.floor(Math.random() * 1000000)}`,
+      orderNumber: `PEDIDO-${Math.floor(Math.random() * 1000000)}`,
       products: cart.lines.map((item) => ({
         name: item.merchandise.product.title,
         quantity: item.quantity,
@@ -52,7 +62,7 @@ export default function CartModal() {
       receiptNumber: receiptNumber // Add receipt number to order details
     };
 
-    const message = `¡Hola! Tu orden ${orderDetails.orderNumber} ha sido realizada con éxito.\n\nResumen de la Orden:\n${orderDetails.products
+    const message = `¡Hola! Tu pedido ${orderDetails.orderNumber} ha sido realizado con éxito.\n\nResumen del Pedido:\n${orderDetails.products
       .map((p) => `- ${p.name} (x${p.quantity}) - ${p.price}`)
       .join("\n")}\nNúmero de Comprobante SINPE: ${orderDetails.receiptNumber}\nTotal: ${orderDetails.totalAmount}\n\n¡Gracias por tu compra!`;
 
@@ -61,7 +71,7 @@ export default function CartModal() {
 
     window.open(whatsappUrl, '_blank');
 
-    alert("¡Orden confirmada! Abriendo WhatsApp con los detalles de tu orden.");
+    alert("¡Pedido confirmado! Abriendo WhatsApp con los detalles de tu pedido.");
   };
 
   useEffect(() => {
@@ -254,7 +264,16 @@ export default function CartModal() {
                   <div className="mb-4 mt-4 rounded-lg border border-neutral-200 bg-neutral-100 p-4 text-sm dark:border-neutral-700 dark:bg-neutral-900">
                     <p className="font-bold">Instrucciones de Pago SINPE Móvil:</p>
                     <p className="mt-2">Realiza tu pago al siguiente número:</p>
-                    <p className="text-lg font-semibold text-blue-600">+506 8770 9040</p>
+                    <div className="flex items-center space-x-2">
+                      <p className="text-lg font-semibold text-blue-600">{paymentNumber}</p>
+                      <button
+                        onClick={() => copyToClipboard(paymentNumber)}
+                        className="p-1.5 rounded-full bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors cursor-pointer"
+                        aria-label="Copiar número de pago"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#cccccc" d="M0 2.729V2a1 1 0 0 1 1-1h2v1H1v12h4v1H1a1 1 0 0 1-1-1zM12 5V2a1 1 0 0 0-1-1H9v1h2v3zm-1 1h2v9H6V6zV5H6a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2z" /><path fill="#cccccc" d="M7 10h5V9H7zm0-2h5V7H7zm0 4h5v-1H7zm0 2h5v-1H7zM9 2V1a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v1h1V1h4v1zM3 3h6V2H3z" /></svg>
+                      </button>
+                    </div>
                     <p className="mt-4">Una vez realizado el pago, ingresa el número de comprobante:</p>
                     <input
                       type="text"
@@ -266,10 +285,10 @@ export default function CartModal() {
                   </div>
                   <button
                     onClick={handleConfirmOrder}
-                    className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                    className={`block w-full rounded-full bg-green-500 p-3 text-center text-sm font-bold ${cart.lines.length === 0 || !receiptNumber.trim() && "opacity-40 cursor-not-allowed"}`}
                     disabled={cart.lines.length === 0 || !receiptNumber.trim()}
                   >
-                    Confirmar Orden y Pagar
+                    Confirmar Pedido y Enviar
                   </button>
                 </div>
               )}
@@ -291,19 +310,5 @@ function CloseCart({ className }: { className?: string }) {
         )}
       />
     </div>
-  );
-}
-
-function CheckoutButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
-      type="submit"
-      disabled={pending}
-    >
-      {pending ? <LoadingDots className="bg-white" /> : 'Proceder al Pago'}
-    </button>
   );
 }
