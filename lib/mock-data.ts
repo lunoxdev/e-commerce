@@ -379,18 +379,6 @@ export const MOCK_COLLECTIONS = [
     path: "/search",
     updatedAt: new Date().toISOString(),
   },
-  {
-    handle: "mock-collection-1",
-    title: "Mock Collection 1",
-    path: "/search/mock-collection-1",
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    handle: "mock-collection-2",
-    title: "Mock Collection 2",
-    path: "/search/mock-collection-2",
-    updatedAt: new Date().toISOString(),
-  },
 ];
 
 export const MOCK_PAGES = [

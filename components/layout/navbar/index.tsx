@@ -1,5 +1,6 @@
 import CartModal from 'components/cart/modal';
 import LogoSquare from 'components/logo-square';
+import { MOCK_COLLECTIONS } from 'lib/mock-data'; // Import MOCK_COLLECTIONS
 // import { getMenu } from 'lib/shopify';
 // import { Menu } from 'lib/shopify/types';
 import Link from 'next/link';
@@ -10,7 +11,7 @@ import Search, { SearchSkeleton } from './search';
 const SITE_NAME = "My E-Commerce"
 
 export async function Navbar() {
-  const menu: { title: string; path: string }[] = []; // Replaced dynamic menu with an empty array
+  const menu = MOCK_COLLECTIONS; // Use MOCK_COLLECTIONS to populate the menu
 
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-6">
@@ -31,9 +32,9 @@ export async function Navbar() {
               {SITE_NAME}
             </div>
           </Link>
-          {/* {menu.length ? (
+          {menu.length ? (
             <ul className="hidden gap-6 text-sm md:flex md:items-center">
-              {menu.map((item: Menu) => (
+              {menu.map((item: { title: string; path: string }) => (
                 <li key={item.title}>
                   <Link
                     href={item.path}
@@ -45,18 +46,7 @@ export async function Navbar() {
                 </li>
               ))}
             </ul>
-          ) : null} */}
-          <ul className="hidden gap-6 text-sm md:flex md:items-center">
-            <li key="all">
-              <Link
-                href="/search"
-                prefetch={true}
-                className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
-              >
-                All
-              </Link>
-            </li>
-          </ul>
+          ) : null}
         </div>
         <div className="hidden justify-center md:flex md:w-1/3">
           <Suspense fallback={<SearchSkeleton />}>
