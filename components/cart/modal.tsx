@@ -64,7 +64,7 @@ export default function CartModal() {
 
     const message = `¡Hola! Tu pedido ${orderDetails.orderNumber} ha sido realizado con éxito.\n\nResumen del Pedido:\n${orderDetails.products
       .map((p) => `- ${p.name} (x${p.quantity}) - ${p.price}`)
-      .join("\n")}\nNúmero de Comprobante SINPE: ${orderDetails.receiptNumber}\nTotal: ${orderDetails.totalAmount}\n\n¡Gracias por tu compra!`;
+      .join("\n")}\nNúmero de comprobante SINPE: ${orderDetails.receiptNumber}\nTotal: ${orderDetails.totalAmount}\n\n¡Gracias por tu compra!`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber.replace("+", "")}/?text=${encodedMessage}`;
@@ -277,7 +277,7 @@ export default function CartModal() {
                     <p className="mt-4">Una vez realizado el pago, ingresa el número de comprobante:</p>
                     <input
                       type="text"
-                      placeholder="Número de Comprobante"
+                      placeholder="Número de comprobante"
                       value={receiptNumber}
                       onChange={(e) => setReceiptNumber(e.target.value)}
                       className="mt-2 w-full rounded-md border border-neutral-300 bg-white p-2 text-black dark:border-neutral-700 dark:bg-neutral-800 dark:text-white"
