@@ -17,7 +17,12 @@ export const metadata: Metadata = {
   description: 'Product page description.'
 };
 
-export default async function ProductPage(props: { params: { handle: string } }) {
+// Explicitly define the expected props type based on Vercel's error
+interface PageProps {
+  params: Promise<{ handle: string }>;
+}
+
+export default async function ProductPage(props: PageProps) {
   const resolvedParams = await props.params; // Await props.params
   const { handle } = resolvedParams; // Destructure handle from resolved params
   const product = MOCK_PRODUCTS.find(p => p.handle === handle);
