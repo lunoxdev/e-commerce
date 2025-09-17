@@ -15,7 +15,7 @@ export type Cart = {
 };
 
 export type CartItem = {
-  id: string | undefined;
+  id: string;
   quantity: number;
   cost: {
     totalAmount: { amount: string; currencyCode: string };
@@ -50,7 +50,7 @@ export type Product = {
   availableForSale: boolean;
 };
 
-type UpdateType = 'plus' | 'minus';
+type UpdateType = 'plus' | 'minus' | 'delete';
 
 type CartAction =
   | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: Product } }
@@ -104,7 +104,7 @@ function createOrUpdateCartItem(
   const totalAmount = calculateItemCost(quantity, variant.price.amount);
 
   return {
-    id: existingItem?.id,
+    id: existingItem?.id || Date.now().toString(), // Ensure id is always a string
     quantity,
     cost: {
       totalAmount: {
@@ -139,7 +139,6 @@ function updateCartTotals(
   return {
     totalQuantity,
     cost: {
-      subtotalAmount: { amount: totalAmount.toString(), currencyCode },
       totalAmount: { amount: totalAmount.toString(), currencyCode },
       totalTaxAmount: { amount: '0', currencyCode }
     }
@@ -153,7 +152,6 @@ function createEmptyCart(): Cart {
     totalQuantity: 0,
     lines: [],
     cost: {
-      subtotalAmount: { amount: '0.00', currencyCode: 'USD' },
       totalAmount: { amount: '0.00', currencyCode: 'USD' },
       totalTaxAmount: { amount: '0.00', currencyCode: 'USD' }
     }

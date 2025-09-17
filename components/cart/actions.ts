@@ -40,7 +40,6 @@ function updateCartTotals(
   return {
     totalQuantity,
     cost: {
-      subtotalAmount: { amount: totalAmount.toString(), currencyCode },
       totalAmount: { amount: totalAmount.toString(), currencyCode },
       totalTaxAmount: { amount: "0", currencyCode },
     },
