@@ -5,7 +5,7 @@ const { COMPANY_NAME, SITE_NAME } = process.env;
 
 export default async function Footer() {
   const currentYear = new Date().getFullYear();
-  const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
+  const copyrightDate = currentYear;
   const skeleton = 'w-full h-6 animate-pulse rounded-sm bg-neutral-200 dark:bg-neutral-700';
   const menu: { title: string; path: string }[] = []; // Replaced dynamic menu with an empty array
   const copyrightName = COMPANY_NAME || SITE_NAME || '';
