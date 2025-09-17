@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import { CartProvider } from 'components/cart/cart-context';
 import { Navbar } from 'components/layout/navbar';
 import { GeistSans } from 'geist/font/sans';
@@ -39,6 +40,7 @@ export default async function RootLayout({
             <Toaster closeButton />
           </main>
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
