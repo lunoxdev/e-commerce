@@ -40,8 +40,14 @@ export const MOCK_PRODUCTS: Product[] = [
       { id: "size", name: "Tamaño", values: ["S", "M", "L", "XL"] },
     ],
     priceRange: {
-      maxVariantPrice: { amount: "20.00", currencyCode: "USD" },
-      minVariantPrice: { amount: "20.00", currencyCode: "USD" },
+      maxVariantPrice: {
+        amount: String(Number("20.00") * 500),
+        currencyCode: "CRC",
+      },
+      minVariantPrice: {
+        amount: String(Number("20.00") * 500),
+        currencyCode: "CRC",
+      },
     },
     variants: [
       {
@@ -52,7 +58,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { name: "Color", value: "Negro" },
           { name: "Size", value: "S" },
         ],
-        price: { amount: "20.00", currencyCode: "USD" },
+        price: { amount: String(Number("20.00") * 500), currencyCode: "CRC" },
       },
       {
         id: "1-black-m",
@@ -62,7 +68,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { name: "Color", value: "Negro" },
           { name: "Size", value: "M" },
         ],
-        price: { amount: "20.00", currencyCode: "USD" },
+        price: { amount: String(Number("20.00") * 500), currencyCode: "CRC" },
       },
       {
         id: "1-black-l",
@@ -72,7 +78,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { name: "Color", value: "Negro" },
           { name: "Size", value: "L" },
         ],
-        price: { amount: "20.00", currencyCode: "USD" },
+        price: { amount: String(Number("20.00") * 500), currencyCode: "CRC" },
       },
       {
         id: "1-black-xl",
@@ -82,7 +88,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { name: "Color", value: "Negro" },
           { name: "Size", value: "XL" },
         ],
-        price: { amount: "20.00", currencyCode: "USD" },
+        price: { amount: String(Number("20.00") * 500), currencyCode: "CRC" },
       },
     ],
     featuredImage: {
@@ -116,8 +122,14 @@ export const MOCK_PRODUCTS: Product[] = [
       "<p>Una bolsa <strong>versátil</strong> con cordón para tus necesidades diarias.</p>",
     options: [{ id: "color", name: "Color", values: ["Negro"] }],
     priceRange: {
-      maxVariantPrice: { amount: "12.00", currencyCode: "USD" },
-      minVariantPrice: { amount: "12.00", currencyCode: "USD" },
+      maxVariantPrice: {
+        amount: String(Number("12.00") * 500),
+        currencyCode: "CRC",
+      },
+      minVariantPrice: {
+        amount: String(Number("12.00") * 500),
+        currencyCode: "CRC",
+      },
     },
     variants: [
       {
@@ -125,7 +137,7 @@ export const MOCK_PRODUCTS: Product[] = [
         title: "Negro",
         availableForSale: true,
         selectedOptions: [{ name: "Color", value: "Negro" }],
-        price: { amount: "12.00", currencyCode: "USD" },
+        price: { amount: String(Number("12.00") * 500), currencyCode: "CRC" },
       },
     ],
     featuredImage: {
@@ -155,8 +167,14 @@ export const MOCK_PRODUCTS: Product[] = [
       "<p>Una taza <strong>elegante</strong> para tus bebidas favoritas.</p>",
     options: [{ id: "color", name: "Color", values: ["Gris"] }],
     priceRange: {
-      maxVariantPrice: { amount: "15.00", currencyCode: "USD" },
-      minVariantPrice: { amount: "15.00", currencyCode: "USD" },
+      maxVariantPrice: {
+        amount: String(Number("15.00") * 500),
+        currencyCode: "CRC",
+      },
+      minVariantPrice: {
+        amount: String(Number("15.00") * 500),
+        currencyCode: "CRC",
+      },
     },
     variants: [
       {
@@ -164,7 +182,7 @@ export const MOCK_PRODUCTS: Product[] = [
         title: "Gris",
         availableForSale: true,
         selectedOptions: [{ name: "Color", value: "Gris" }],
-        price: { amount: "15.00", currencyCode: "USD" },
+        price: { amount: String(Number("15.00") * 500), currencyCode: "CRC" },
       },
     ],
     featuredImage: {
@@ -194,8 +212,14 @@ export const MOCK_PRODUCTS: Product[] = [
       "<p>Una taza de cerámica <strong>clásica</strong> para tu café o té.</p>",
     options: [{ id: "color", name: "Color", values: ["Negro"] }],
     priceRange: {
-      maxVariantPrice: { amount: "15.00", currencyCode: "USD" },
-      minVariantPrice: { amount: "15.00", currencyCode: "USD" },
+      maxVariantPrice: {
+        amount: String(Number("15.00") * 500),
+        currencyCode: "CRC",
+      },
+      minVariantPrice: {
+        amount: String(Number("15.00") * 500),
+        currencyCode: "CRC",
+      },
     },
     variants: [
       {
@@ -203,7 +227,7 @@ export const MOCK_PRODUCTS: Product[] = [
         title: "Negro",
         availableForSale: true,
         selectedOptions: [{ name: "Color", value: "Negro" }],
-        price: { amount: "15.00", currencyCode: "USD" },
+        price: { amount: String(Number("15.00") * 500), currencyCode: "CRC" },
       },
     ],
     featuredImage: {
@@ -236,8 +260,14 @@ export const MOCK_PRODUCTS: Product[] = [
       { id: "size", name: "Tamaño", values: ["S", "M", "L"] },
     ],
     priceRange: {
-      maxVariantPrice: { amount: "50.00", currencyCode: "USD" },
-      minVariantPrice: { amount: "50.00", currencyCode: "USD" },
+      maxVariantPrice: {
+        amount: String(Number("50.00") * 500),
+        currencyCode: "CRC",
+      },
+      minVariantPrice: {
+        amount: String(Number("50.00") * 500),
+        currencyCode: "CRC",
+      },
     },
     variants: [
       {
@@ -248,7 +278,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { name: "Color", value: "Gris" },
           { name: "Size", value: "S" },
         ],
-        price: { amount: "50.00", currencyCode: "USD" },
+        price: { amount: String(Number("50.00") * 500), currencyCode: "CRC" },
       },
       {
         id: "5-gray-m",
@@ -258,7 +288,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { name: "Color", value: "Gris" },
           { name: "Size", value: "M" },
         ],
-        price: { amount: "50.00", currencyCode: "USD" },
+        price: { amount: String(Number("50.00") * 500), currencyCode: "CRC" },
       },
       {
         id: "5-gray-l",
@@ -268,7 +298,7 @@ export const MOCK_PRODUCTS: Product[] = [
           { name: "Color", value: "Gris" },
           { name: "Size", value: "L" },
         ],
-        price: { amount: "50.00", currencyCode: "USD" },
+        price: { amount: String(Number("50.00") * 500), currencyCode: "CRC" },
       },
     ],
     featuredImage: {
@@ -297,8 +327,14 @@ export const MOCK_PRODUCTS: Product[] = [
     descriptionHtml: "<p>Un <strong>lindo</strong> pijama de bebé.</p>",
     options: [{ id: "size", name: "Tamaño", values: ["RN", "3M", "6M"] }],
     priceRange: {
-      maxVariantPrice: { amount: "10.00", currencyCode: "USD" },
-      minVariantPrice: { amount: "10.00", currencyCode: "USD" },
+      maxVariantPrice: {
+        amount: String(Number("10.00") * 500),
+        currencyCode: "CRC",
+      },
+      minVariantPrice: {
+        amount: String(Number("10.00") * 500),
+        currencyCode: "CRC",
+      },
     },
     variants: [
       {
@@ -306,21 +342,21 @@ export const MOCK_PRODUCTS: Product[] = [
         title: "Recién Nacido",
         availableForSale: true,
         selectedOptions: [{ name: "Size", value: "NB" }],
-        price: { amount: "10.00", currencyCode: "USD" },
+        price: { amount: String(Number("10.00") * 500), currencyCode: "CRC" },
       },
       {
         id: "6-3m",
         title: "3 Meses",
         availableForSale: true,
         selectedOptions: [{ name: "Size", value: "3M" }],
-        price: { amount: "10.00", currencyCode: "USD" },
+        price: { amount: String(Number("10.00") * 500), currencyCode: "CRC" },
       },
       {
         id: "6-6m",
         title: "6 Meses",
         availableForSale: true,
         selectedOptions: [{ name: "Size", value: "6M" }],
-        price: { amount: "10.00", currencyCode: "USD" },
+        price: { amount: String(Number("10.00") * 500), currencyCode: "CRC" },
       },
     ],
     featuredImage: {
@@ -349,11 +385,11 @@ export const MOCK_CART = {
   cost: {
     totalAmount: {
       amount: "0.00", // Set to 0.00 for an empty cart template
-      currencyCode: "USD",
+      currencyCode: "CRC",
     },
     totalTaxAmount: {
       amount: "0.00", // Set to 0.00 for an empty cart template
-      currencyCode: "USD",
+      currencyCode: "CRC",
     },
   },
   lines: [], // Empty lines array for an empty cart template

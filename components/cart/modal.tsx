@@ -40,9 +40,9 @@ export default function CartModal() {
       products: cart.lines.map((item) => ({
         name: item.merchandise.product.title,
         quantity: item.quantity,
-        price: `${item.cost.totalAmount.currencyCode} ${item.cost.totalAmount.amount}`
+        price: `CRC ${new Intl.NumberFormat(undefined, { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0, useGrouping: true }).format(parseFloat(item.cost.totalAmount.amount))}`
       })),
-      totalAmount: `${cart.cost.totalAmount.currencyCode} ${cart.cost.totalAmount.amount}`
+      totalAmount: `CRC ${new Intl.NumberFormat(undefined, { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0, useGrouping: true }).format(parseFloat(cart.cost.totalAmount.amount))}`
     };
 
     const message = `¡Hola! Tu orden ${orderDetails.orderNumber} ha sido realizada con éxito.\n\nResumen de la Orden:\n${orderDetails.products
