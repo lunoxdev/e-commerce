@@ -1,10 +1,10 @@
-import { getCollectionProducts } from 'lib/shopify';
+import { MOCK_PRODUCTS, Product } from 'lib/mock-data';
 import Link from 'next/link';
 import { GridTileImage } from './grid/tile';
 
 export async function Carousel() {
   // Collections that start with `hidden-*` are hidden from the search page.
-  const products = await getCollectionProducts({ collection: 'hidden-homepage-carousel' });
+  const products: Product[] = MOCK_PRODUCTS.filter(product => product.tags.includes('featured')); // Using mock data
 
   if (!products?.length) return null;
 

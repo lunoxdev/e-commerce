@@ -1,31 +1,26 @@
 import type { Metadata } from 'next';
 
 import Prose from 'components/prose';
-import { getPage } from 'lib/shopify';
+// import { getPage } from 'lib/shopify';
 import { notFound } from 'next/navigation';
 
-export async function generateMetadata(props: {
-  params: Promise<{ page: string }>;
-}): Promise<Metadata> {
-  const params = await props.params;
-  const page = await getPage(params.page);
+export const metadata: Metadata = {
+  title: 'Page',
+  description: 'Page description.'
+};
 
-  if (!page) return notFound();
-
-  return {
-    title: page.seo?.title || page.title,
-    description: page.seo?.description || page.bodySummary,
-    openGraph: {
-      publishedTime: page.createdAt,
-      modifiedTime: page.updatedAt,
-      type: 'article'
-    }
-  };
+interface Page {
+  title: string;
+  body: string;
+  updatedAt: string;
 }
 
-export default async function Page(props: { params: Promise<{ page: string }> }) {
-  const params = await props.params;
-  const page = await getPage(params.page);
+export default async function Page(props: { params: { page: string } }) {
+  const page: Page = {
+    title: 'Dummy Page',
+    body: '<p>This is a dummy page body.</p>',
+    updatedAt: new Date().toISOString(),
+  };
 
   if (!page) return notFound();
 
@@ -37,7 +32,7 @@ export default async function Page(props: { params: Promise<{ page: string }> })
         {`This document was last updated on ${new Intl.DateTimeFormat(undefined, {
           year: 'numeric',
           month: 'long',
-          day: 'numeric'
+          day: 'numeric',
         }).format(new Date(page.updatedAt))}.`}
       </p>
     </>

@@ -1,8 +1,23 @@
 import { AddToCart } from 'components/cart/add-to-cart';
 import Price from 'components/price';
 import Prose from 'components/prose';
-import { Product } from 'lib/shopify/types';
 import { VariantSelector } from './variant-selector';
+interface Product {
+  id: string;
+  handle: string;
+  availableForSale: boolean;
+  title: string;
+  description: string;
+  descriptionHtml: string;
+  options: { id: string; name: string; values: string[] }[];
+  priceRange: { maxVariantPrice: { amount: string; currencyCode: string } };
+  variants: { id: string; availableForSale: boolean; selectedOptions: { name: string; value: string }[] }[];
+  featuredImage: { url: string; altText: string };
+  images: { url: string; altText: string }[];
+  seo: { title: string; description: string };
+  tags: string[];
+  updatedAt: string;
+}
 
 export function ProductDescription({ product }: { product: Product }) {
   return (

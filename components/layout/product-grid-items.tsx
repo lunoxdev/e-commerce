@@ -1,7 +1,13 @@
 import Grid from 'components/grid';
 import { GridTileImage } from 'components/grid/tile';
-import { Product } from 'lib/shopify/types';
 import Link from 'next/link';
+interface Product {
+  id: string;
+  handle: string;
+  title: string;
+  priceRange: { maxVariantPrice: { amount: string; currencyCode: string } };
+  featuredImage?: { url: string; altText: string };
+}
 
 export default function ProductGridItems({ products }: { products: Product[] }) {
   return (

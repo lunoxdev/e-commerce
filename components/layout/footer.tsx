@@ -2,8 +2,7 @@ import Link from 'next/link';
 
 import FooterMenu from 'components/layout/footer-menu';
 import LogoSquare from 'components/logo-square';
-import { getMenu } from 'lib/shopify';
-import { Suspense } from 'react';
+// import { getMenu } from 'lib/shopify';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 
@@ -11,7 +10,7 @@ export default async function Footer() {
   const currentYear = new Date().getFullYear();
   const copyrightDate = 2023 + (currentYear > 2023 ? `-${currentYear}` : '');
   const skeleton = 'w-full h-6 animate-pulse rounded-sm bg-neutral-200 dark:bg-neutral-700';
-  const menu = await getMenu('next-js-frontend-footer-menu');
+  const menu: { title: string; path: string }[] = []; // Replaced dynamic menu with an empty array
   const copyrightName = COMPANY_NAME || SITE_NAME || '';
 
   return (
@@ -23,7 +22,7 @@ export default async function Footer() {
             <span className="uppercase">{SITE_NAME}</span>
           </Link>
         </div>
-        <Suspense
+        {/* <Suspense
           fallback={
             <div className="flex h-[188px] w-[200px] flex-col gap-2">
               <div className={skeleton} />
@@ -36,7 +35,8 @@ export default async function Footer() {
           }
         >
           <FooterMenu menu={menu} />
-        </Suspense>
+        </Suspense> */}
+        <FooterMenu menu={menu} />
         <div className="md:ml-auto">
           <a
             className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"

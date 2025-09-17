@@ -1,33 +1,63 @@
 'use client';
 
-import type {
-  Cart,
-  CartItem,
-  Product,
-  ProductVariant
-} from 'lib/shopify/types';
-import React, {
-  createContext,
-  use,
-  useContext,
-  useMemo,
-  useOptimistic
-} from 'react';
+import { createContext, ReactNode, useContext, useMemo, useOptimistic } from 'react';
 
-type UpdateType = 'plus' | 'minus' | 'delete';
+// Placeholder types - in a real app, these would come from lib/shopify/types
+export type Cart = {
+  id: string;
+  totalQuantity: number;
+  checkoutUrl: string; // Added checkoutUrl
+  cost: {
+    totalAmount: { amount: string; currencyCode: string };
+    totalTaxAmount: { amount: string; currencyCode: string };
+  };
+  lines: CartItem[];
+};
+
+export type CartItem = {
+  id: string | undefined;
+  quantity: number;
+  cost: {
+    totalAmount: { amount: string; currencyCode: string };
+  };
+  merchandise: {
+    id: string;
+    title: string;
+    selectedOptions: { name: string; value: string }[];
+    product: {
+      id: string;
+      handle: string;
+      title: string;
+      featuredImage: { url: string; altText: string };
+    };
+  };
+};
+
+export type ProductVariant = {
+  id: string;
+  title: string;
+  availableForSale: boolean;
+  selectedOptions: { name: string; value: string }[];
+  price: { amount: string; currencyCode: string };
+};
+
+export type Product = {
+  id: string;
+  handle: string;
+  title: string;
+  featuredImage: { url: string; altText: string };
+  variants: ProductVariant[];
+  availableForSale: boolean;
+};
+
+type UpdateType = 'plus' | 'minus';
 
 type CartAction =
-  | {
-      type: 'UPDATE_ITEM';
-      payload: { merchandiseId: string; updateType: UpdateType };
-    }
-  | {
-      type: 'ADD_ITEM';
-      payload: { variant: ProductVariant; product: Product };
-    };
+  | { type: 'ADD_ITEM'; payload: { variant: ProductVariant; product: Product } }
+  | { type: 'UPDATE_ITEM'; payload: { merchandiseId: string; updateType: UpdateType } };
 
 type CartContextType = {
-  cartPromise: Promise<Cart | undefined>;
+  initialCart: Cart | undefined; // Changed from cartPromise
 };
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -118,14 +148,14 @@ function updateCartTotals(
 
 function createEmptyCart(): Cart {
   return {
-    id: undefined,
-    checkoutUrl: '',
+    id: 'dummy-cart-id',
+    checkoutUrl: '/checkout',
     totalQuantity: 0,
     lines: [],
     cost: {
-      subtotalAmount: { amount: '0', currencyCode: 'USD' },
-      totalAmount: { amount: '0', currencyCode: 'USD' },
-      totalTaxAmount: { amount: '0', currencyCode: 'USD' }
+      subtotalAmount: { amount: '0.00', currencyCode: 'USD' },
+      totalAmount: { amount: '0.00', currencyCode: 'USD' },
+      totalTaxAmount: { amount: '0.00', currencyCode: 'USD' }
     }
   };
 }
@@ -175,8 +205,8 @@ function cartReducer(state: Cart | undefined, action: CartAction): Cart {
 
       const updatedLines = existingItem
         ? currentCart.lines.map((item) =>
-            item.merchandise.id === variant.id ? updatedItem : item
-          )
+          item.merchandise.id === variant.id ? updatedItem : item
+        )
         : [...currentCart.lines, updatedItem];
 
       return {
@@ -192,13 +222,13 @@ function cartReducer(state: Cart | undefined, action: CartAction): Cart {
 
 export function CartProvider({
   children,
-  cartPromise
+  initialCart
 }: {
-  children: React.ReactNode;
-  cartPromise: Promise<Cart | undefined>;
+  children: ReactNode;
+  initialCart: Cart | undefined;
 }) {
   return (
-    <CartContext.Provider value={{ cartPromise }}>
+    <CartContext.Provider value={{ initialCart }}> {/* Pass initialCart directly */}
       {children}
     </CartContext.Provider>
   );
@@ -210,16 +240,15 @@ export function useCart() {
     throw new Error('useCart must be used within a CartProvider');
   }
 
-  const initialCart = use(context.cartPromise);
   const [optimisticCart, updateOptimisticCart] = useOptimistic(
-    initialCart,
+    context.initialCart, // Use initialCart directly
     cartReducer
   );
 
-  const updateCartItem = (merchandiseId: string, updateType: UpdateType) => {
+  const updateCartItem = (lineId: string, updateType: UpdateType) => {
     updateOptimisticCart({
       type: 'UPDATE_ITEM',
-      payload: { merchandiseId, updateType }
+      payload: { merchandiseId: lineId, updateType }
     });
   };
 

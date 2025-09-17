@@ -2,11 +2,22 @@
 
 import { PlusIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
-import { addItem } from 'components/cart/actions';
 import { useProduct } from 'components/product/product-context';
-import { Product, ProductVariant } from 'lib/shopify/types';
-import { useActionState } from 'react';
-import { useCart } from './cart-context';
+import { useActionState } from 'react'; // Import useActionState
+import { addItem } from './actions'; // Import addItem server action
+import { Product, ProductVariant } from './cart-context'; // Import Product and ProductVariant
+// interface Product { // Removed local interface
+//   id: string;
+//   handle: string;
+//   availableForSale: boolean;
+//   variants: ProductVariant[];
+// }
+// interface ProductVariant { // Removed local interface
+//   id: string;
+//   title: string;
+//   availableForSale: boolean;
+//   selectedOptions: { name: string; value: string }[];
+// }
 
 function SubmitButton({
   availableForSale,
@@ -59,9 +70,9 @@ function SubmitButton({
 
 export function AddToCart({ product }: { product: Product }) {
   const { variants, availableForSale } = product;
-  const { addCartItem } = useCart();
+  // const { addCartItem } = useCart(); // No longer directly calling addCartItem
   const { state } = useProduct();
-  const [message, formAction] = useActionState(addItem, null);
+  const [message, formAction] = useActionState(addItem, null); // Uncommented
 
   const variant = variants.find((variant: ProductVariant) =>
     variant.selectedOptions.every(
@@ -70,16 +81,18 @@ export function AddToCart({ product }: { product: Product }) {
   );
   const defaultVariantId = variants.length === 1 ? variants[0]?.id : undefined;
   const selectedVariantId = variant?.id || defaultVariantId;
-  const addItemAction = formAction.bind(null, selectedVariantId);
-  const finalVariant = variants.find(
-    (variant) => variant.id === selectedVariantId
-  )!;
+  const addItemAction = formAction.bind(null, selectedVariantId); // Uncommented
+  // const finalVariant = variants.find(
+  //   (variant) => variant.id === selectedVariantId
+  // );
+
+  console.log("Selected Variant ID for Add to Cart:", selectedVariantId); // Added console.log
 
   return (
     <form
       action={async () => {
-        addCartItem(finalVariant, product);
-        addItemAction();
+        // addCartItem(finalVariant, product); // No longer directly calling addCartItem
+        addItemAction(); // Call the server action
       }}
     >
       <SubmitButton

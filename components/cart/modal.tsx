@@ -1,8 +1,8 @@
 'use client';
 
-import clsx from 'clsx';
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
 import LoadingDots from 'components/loading-dots';
 import Price from 'components/price';
 import { DEFAULT_OPTION } from 'lib/constants';
@@ -11,8 +11,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { createCartAndSetCookie, redirectToCheckout } from './actions';
-import { useCart } from './cart-context';
+import { createCartAndSetCookie } from './actions';
+import { CartItem, useCart } from './cart-context';
 import { DeleteItemButton } from './delete-item-button';
 import { EditItemQuantityButton } from './edit-item-quantity-button';
 import OpenCart from './open-cart';
@@ -27,6 +27,35 @@ export default function CartModal() {
   const quantityRef = useRef(cart?.totalQuantity);
   const openCart = () => setIsOpen(true);
   const closeCart = () => setIsOpen(false);
+  const phoneNumber = "+50672829018"; // Your WhatsApp number
+
+  const handleConfirmOrder = () => {
+    if (!cart || cart.lines.length === 0) {
+      alert("Your cart is empty. Please add items before confirming.");
+      return;
+    }
+
+    const orderDetails = {
+      orderNumber: `ORDER-${Math.floor(Math.random() * 1000000)}`,
+      products: cart.lines.map((item) => ({
+        name: item.merchandise.product.title,
+        quantity: item.quantity,
+        price: `${item.cost.totalAmount.currencyCode} ${item.cost.totalAmount.amount}`
+      })),
+      totalAmount: `${cart.cost.totalAmount.currencyCode} ${cart.cost.totalAmount.amount}`
+    };
+
+    const message = `Hello! Your order ${orderDetails.orderNumber} has been placed successfully.\n\nOrder Summary:\n${orderDetails.products
+      .map((p) => `- ${p.name} (x${p.quantity}) - ${p.price}`)
+      .join("\n")}\nTotal: ${orderDetails.totalAmount}\n\nThank you for your purchase!`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber.replace("+", "")}/?text=${encodedMessage}`;
+
+    window.open(whatsappUrl, '_blank');
+
+    alert("Order confirmed! Opening WhatsApp with order details.");
+  };
 
   useEffect(() => {
     if (!cart) {
@@ -124,7 +153,7 @@ export default function CartModal() {
                             <div className="relative flex w-full flex-row justify-between px-1 py-4">
                               <div className="absolute z-40 -ml-1 -mt-2">
                                 <DeleteItemButton
-                                  item={item}
+                                  item={item as CartItem}
                                   optimisticUpdate={updateCartItem}
                                 />
                               </div>
@@ -154,7 +183,7 @@ export default function CartModal() {
                                       {item.merchandise.product.title}
                                     </span>
                                     {item.merchandise.title !==
-                                    DEFAULT_OPTION ? (
+                                      DEFAULT_OPTION ? (
                                       <p className="text-sm text-neutral-500 dark:text-neutral-400">
                                         {item.merchandise.title}
                                       </p>
@@ -172,7 +201,7 @@ export default function CartModal() {
                                 />
                                 <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
                                   <EditItemQuantityButton
-                                    item={item}
+                                    item={item as CartItem}
                                     type="minus"
                                     optimisticUpdate={updateCartItem}
                                   />
@@ -182,7 +211,7 @@ export default function CartModal() {
                                     </span>
                                   </p>
                                   <EditItemQuantityButton
-                                    item={item}
+                                    item={item as CartItem}
                                     type="plus"
                                     optimisticUpdate={updateCartItem}
                                   />
@@ -215,9 +244,13 @@ export default function CartModal() {
                       />
                     </div>
                   </div>
-                  <form action={redirectToCheckout}>
-                    <CheckoutButton />
-                  </form>
+                  <button
+                    onClick={handleConfirmOrder}
+                    className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                    disabled={cart.lines.length === 0}
+                  >
+                    Confirm Order & Pay
+                  </button>
                 </div>
               )}
             </Dialog.Panel>

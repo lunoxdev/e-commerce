@@ -2,7 +2,16 @@
 
 import clsx from 'clsx';
 import { useProduct, useUpdateURL } from 'components/product/product-context';
-import { ProductOption, ProductVariant } from 'lib/shopify/types';
+interface ProductOption {
+  id: string;
+  name: string;
+  values: string[];
+}
+interface ProductVariant {
+  id: string;
+  availableForSale: boolean;
+  selectedOptions: { name: string; value: string }[];
+}
 
 type Combination = {
   id: string;
