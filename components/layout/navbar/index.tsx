@@ -3,13 +3,17 @@ import LogoSquare from 'components/logo-square';
 import { MOCK_COLLECTIONS } from 'lib/mock-data'; // Import MOCK_COLLECTIONS
 import Link from 'next/link';
 import { Suspense } from 'react';
+import { createClient } from 'utils/supabase/server';
 import MobileMenu from './mobile-menu';
 import Search, { SearchSkeleton } from './search';
+import UserAccountNav from './UserAccountNav';
 
 const SITE_NAME = "Mai Store"
 
 export async function Navbar() {
   const menu = MOCK_COLLECTIONS; // Use MOCK_COLLECTIONS to populate the menu
+  const supabase = await createClient();
+  const { data: { session } } = await supabase.auth.getSession();
 
   return (
     <nav className="relative flex items-center justify-between p-4 lg:px-6">
@@ -52,6 +56,9 @@ export async function Navbar() {
           </Suspense>
         </div>
         <div className="flex justify-end md:w-1/3">
+          {session ? (
+            <UserAccountNav session={session} />
+          ) : null}
           <CartModal />
         </div>
       </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import { createClient } from '@/utils/supabase/client';
 import { Dialog, Transition } from '@headlessui/react';
 import { ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
@@ -30,6 +31,8 @@ export default function CartModal() {
   const paymentNumber = '22222222'; // The payment number to be copied
   const [displayedPaymentNumber, setDisplayedPaymentNumber] = useState(paymentNumber);
   const [showCopyButton, setShowCopyButton] = useState(true); // New state for copy button visibility
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false); // New state for login prompt visibility
+  const supabase = createClient(); // Initialize Supabase client
 
   const copyToClipboard = async (text: string) => {
     try {
@@ -46,7 +49,7 @@ export default function CartModal() {
     }
   };
 
-  const handleConfirmOrder = () => {
+  const handleConfirmOrder = async () => {
     if (!cart || cart.lines.length === 0) {
       alert("Tu carrito está vacío. Por favor, agrega artículos antes de confirmar.");
       return;
@@ -57,6 +60,21 @@ export default function CartModal() {
       return;
     }
 
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+
+    if (sessionError) {
+      console.error('Error getting session:', sessionError);
+      alert('Hubo un error al verificar tu sesión. Por favor, intenta de nuevo.');
+      return;
+    }
+
+    if (!session) {
+      // User is not logged in, show login prompt
+      setShowLoginPrompt(true);
+      return;
+    }
+
+    // User is logged in, proceed with order confirmation
     const orderDetails = {
       orderNumber: `PEDIDO-${Math.floor(Math.random() * 1000000)}`,
       products: cart.lines.map((item) => ({
@@ -303,6 +321,34 @@ export default function CartModal() {
                     disabled={cart.lines.length === 0 || !receiptNumber.trim()}
                   >
                     Confirmar Pedido y Enviar
+                  </button>
+                </div>
+              )}
+              {showLoginPrompt && (
+                <div className="mt-6">
+                  <p className="mb-4 text-center text-lg font-semibold">Por favor, inicia sesión para continuar con tu pedido.</p>
+                  <button
+                    onClick={async () => {
+                      const { error } = await supabase.auth.signInWithOAuth({
+                        provider: 'google',
+                        options: {
+                          redirectTo: `${window.location.origin}/auth/callback`,
+                        },
+                      });
+                      if (error) {
+                        console.error('Error logging in with Google:', error);
+                        alert('Hubo un error al iniciar sesión con Google. Por favor, intenta de nuevo.');
+                      }
+                    }}
+                    className="w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                  >
+                    Iniciar sesión con Google
+                  </button>
+                  <button
+                    onClick={() => setShowLoginPrompt(false)} // Allow user to go back
+                    className="mt-2 w-full rounded-full border border-neutral-300 p-3 text-center text-sm font-medium text-black dark:border-neutral-700 dark:text-white hover:bg-neutral-200 dark:hover:bg-neutral-800"
+                  >
+                    Cancelar
                   </button>
                 </div>
               )}
