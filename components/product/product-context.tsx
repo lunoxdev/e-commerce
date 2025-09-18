@@ -36,7 +36,7 @@ export function ProductProvider({
     // Set default selected options if not present in URL
     product.options.forEach((option) => {
       if (!params[option.name.toLowerCase()] && option.values.length > 0) {
-        params[option.name.toLowerCase()] = option.values[0];
+        params[option.name.toLowerCase()] = option.values[0]!;
       }
     });
 

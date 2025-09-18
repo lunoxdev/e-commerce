@@ -1,12 +1,16 @@
 'use client';
 
-import { Session } from '@supabase/supabase-js';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
-import { createClient } from 'utils/supabase/client';
+import { createClient } from "@/utils/supabase/client";
+import { Session } from "@supabase/supabase-js";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
-export default function UserAccountNav({ session }: { session: Session | null }) {
+interface UserAccountNavProps {
+    session: Session | null;
+}
+
+export default function UserAccountNav({ session }: UserAccountNavProps) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
@@ -28,9 +32,9 @@ export default function UserAccountNav({ session }: { session: Session | null })
                 setIsDropdownOpen(false);
             }
         };
-        document.addEventListener('mousedown', handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
         return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener("mousedown", handleClickOutside);
         };
     }, []);
 
@@ -44,13 +48,13 @@ export default function UserAccountNav({ session }: { session: Session | null })
                 onClick={toggleDropdown}
                 className="flex items-center h-full space-x-2 mr-4 focus:outline-none"
             >
-                {session.user?.user_metadata?.avatar_url ? (
+                {session.user?.user_metadata?.avatar_url || session.user?.user_metadata?.picture ? (
                     <Image
-                        src={session.user.user_metadata.avatar_url}
+                        src={session.user.user_metadata.avatar_url || session.user.user_metadata.picture}
                         alt="User Avatar"
                         width={32}
                         height={32}
-                        className="h-10 w-10 rounded-full border border-blue-500 shrink-0"
+                        className="h-10 w-10 rounded-full border border-blue-500 shrink-0 object-cover"
                     />
                 ) : (
                     <div className="h-8 w-8 rounded-full border bg-neutral-600 flex items-center justify-center text-white text-md font-bold">
