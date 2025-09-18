@@ -44,7 +44,7 @@ export default async function ProductPage(props: PageProps) {
   };
 
   return (
-    <ProductProvider>
+    <ProductProvider product={product}> {/* Pass product to ProductProvider */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

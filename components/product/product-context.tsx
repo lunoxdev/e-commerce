@@ -1,5 +1,6 @@
 'use client';
 
+import { Product } from 'lib/mock-data'; // Import Product interface
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { createContext, useContext, useMemo, useOptimistic } from 'react';
 
@@ -17,7 +18,13 @@ type ProductContextType = {
 
 const ProductContext = createContext<ProductContextType | undefined>(undefined);
 
-export function ProductProvider({ children }: { children: React.ReactNode }) {
+export function ProductProvider({
+  children,
+  product // Accept product as a prop
+}: {
+  children: React.ReactNode;
+  product: Product; // Define product type
+}) {
   const searchParams = useSearchParams();
 
   const getInitialState = () => {
@@ -25,6 +32,14 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
     for (const [key, value] of searchParams.entries()) {
       params[key] = value;
     }
+
+    // Set default selected options if not present in URL
+    product.options.forEach((option) => {
+      if (!params[option.name.toLowerCase()] && option.values.length > 0) {
+        params[option.name.toLowerCase()] = option.values[0];
+      }
+    });
+
     return params;
   };
 

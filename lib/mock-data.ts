@@ -37,7 +37,7 @@ export const MOCK_PRODUCTS: Product[] = [
       "<p>Una camiseta elegante con un diseño único de <strong>círculos</strong>.</p>",
     options: [
       { id: "color", name: "Color", values: ["Negro", "Blanco"] },
-      { id: "size", name: "Tamaño", values: ["S", "M", "L", "XL"] },
+      { id: "size", name: "Size", values: ["S", "M", "L", "XL"] },
     ],
     priceRange: {
       maxVariantPrice: {
@@ -56,7 +56,7 @@ export const MOCK_PRODUCTS: Product[] = [
         availableForSale: true,
         selectedOptions: [
           { name: "Color", value: "Negro" },
-          { name: "Size", value: "S" },
+          { name: "size", value: "S" },
         ],
         price: { amount: String(Number("20.00") * 500), currencyCode: "CRC" },
       },
@@ -66,7 +66,7 @@ export const MOCK_PRODUCTS: Product[] = [
         availableForSale: true,
         selectedOptions: [
           { name: "Color", value: "Negro" },
-          { name: "Size", value: "M" },
+          { name: "size", value: "M" },
         ],
         price: { amount: String(Number("20.00") * 500), currencyCode: "CRC" },
       },
@@ -76,7 +76,7 @@ export const MOCK_PRODUCTS: Product[] = [
         availableForSale: true,
         selectedOptions: [
           { name: "Color", value: "Negro" },
-          { name: "Size", value: "L" },
+          { name: "size", value: "L" },
         ],
         price: { amount: String(Number("20.00") * 500), currencyCode: "CRC" },
       },
@@ -86,7 +86,7 @@ export const MOCK_PRODUCTS: Product[] = [
         availableForSale: true,
         selectedOptions: [
           { name: "Color", value: "Negro" },
-          { name: "Size", value: "XL" },
+          { name: "size", value: "XL" },
         ],
         price: { amount: String(Number("20.00") * 500), currencyCode: "CRC" },
       },
@@ -257,7 +257,7 @@ export const MOCK_PRODUCTS: Product[] = [
       "<p>Una sudadera <strong>cómoda</strong> y elegante con capucha.</p>",
     options: [
       { id: "color", name: "Color", values: ["Gris"] },
-      { id: "size", name: "Tamaño", values: ["S", "M", "L"] },
+      { id: "size", name: "Size", values: ["S", "M", "L"] },
     ],
     priceRange: {
       maxVariantPrice: {
@@ -276,7 +276,7 @@ export const MOCK_PRODUCTS: Product[] = [
         availableForSale: true,
         selectedOptions: [
           { name: "Color", value: "Gris" },
-          { name: "Size", value: "S" },
+          { name: "size", value: "S" },
         ],
         price: { amount: String(Number("50.00") * 500), currencyCode: "CRC" },
       },
@@ -286,7 +286,7 @@ export const MOCK_PRODUCTS: Product[] = [
         availableForSale: true,
         selectedOptions: [
           { name: "Color", value: "Gris" },
-          { name: "Size", value: "M" },
+          { name: "size", value: "M" },
         ],
         price: { amount: String(Number("50.00") * 500), currencyCode: "CRC" },
       },
@@ -296,7 +296,7 @@ export const MOCK_PRODUCTS: Product[] = [
         availableForSale: true,
         selectedOptions: [
           { name: "Color", value: "Gris" },
-          { name: "Size", value: "L" },
+          { name: "size", value: "L" },
         ],
         price: { amount: String(Number("50.00") * 500), currencyCode: "CRC" },
       },
@@ -325,7 +325,7 @@ export const MOCK_PRODUCTS: Product[] = [
     title: "Pijama de Bebé",
     description: "Un lindo pijama de bebé.",
     descriptionHtml: "<p>Un <strong>lindo</strong> pijama de bebé.</p>",
-    options: [{ id: "size", name: "Tamaño", values: ["RN", "3M", "6M"] }],
+    options: [{ id: "size", name: "Size", values: ["RN", "3M", "6M"] }],
     priceRange: {
       maxVariantPrice: {
         amount: String(Number("10.00") * 500),
